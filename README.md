@@ -25,3 +25,52 @@ This project demonstrates how to design deterministic, testable, and modular AI 
 ✅ Pytest + Ruff enabled (production-ready quality)
 
 🏗️ Architecture Overview
+User
+ │
+ ▼
+Streamlit Frontend
+ │
+ ▼
+FastAPI Backend
+ │
+ ▼
+LangGraph Agent
+ │
+ ├── Typed State (Pydantic)
+ ├── Intent / Severity Classifier
+ ├── Domain Routers
+ ├── Prompt Modules
+ └── Structured Response
+
+📁 Project Structure
+
+customer_agent/
+├── app/
+│   ├── agent.py        # LangGraph orchestration logic
+│   ├── state.py        # Typed agent state (Pydantic)
+│   ├── config.py       # LLM config & system prompts
+│   ├── router.py       # Intent / domain routing
+│   │
+│   ├── prompts/        # Modular prompt logic
+│   │   ├── classifier.py   # Intent & severity classification
+│   │   ├── account.py      # Account-related responses
+│   │   ├── billing.py      # Billing support logic
+│   │   ├── technical.py    # Technical issue handling
+│   │   ├── feedback.py     # Feedback & sentiment handling
+│   │   └── general.py      # General inquiries
+│   │
+│   └── __init__.py
+│
+├── backend.py          # FastAPI API layer
+├── frontend.py         # Streamlit UI
+├── tests/              # Pytest test suite
+│   ├── test_agent.py
+│   ├── test_state.py
+│   ├── test_backend.py
+│   ├── test_prompts.py
+│   └── conftest.py
+│
+├── pyproject.toml      # Tooling configuration
+├── requirements.txt
+├── .gitignore
+└── README.md
